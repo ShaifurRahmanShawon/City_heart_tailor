@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Heart Tailor</title>
+   
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Bootstrap 5 CSS -->
+    <!-- <link rel="stylesheet" href="css/bootstrap-icons.css">    Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        /* ==================== Navbar ==================== */
+        .navbar {
+            backdrop-filter: blur(50px);
+            background-color: rgba(255, 255, 255, 0.231) !important;
+            --bs-navbar-brand-margin-end: 0rem;
+        }
+        .navbar-nav {
+            flex-grow: 1;
+            justify-content: center;
+        }
+        .navbar .d-flex {
+            flex-shrink: 0;
+        }
+        .navbar-nav .nav-link {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Responsive Navbar Adjustments */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .navbar .d-flex {
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* ==================== Hero Slider ==================== */
+        #heroSlider {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background-image: url("img/banner/top-banner-web.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        @media screen and (max-width: 720px) {
+            #heroSlider {
+                background-image: url("img/banner/top-banner-mobile.png");
+                height: 80vh;
+                object-fit: cover;
+                object-position: center;
+                margin-top: -56px;
+            }
+        }
+        @media screen and (min-width: 721px) and (max-width: 1024px) {
+            #heroSlider img.Banner-Top {
+                margin-top: -64px;
+                height: 80vh;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+        @media screen and (min-width: 1025px) {
+            #heroSlider img.Banner-Top {
+                margin-top: -70px;
+                height: 80vh;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        /* ==================== Product Cards ==================== */
+        .product-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ==================== Product Features ==================== */
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
+
+        /* ==================== Product Filter ==================== */
+        .product-item {
+            transition: opacity 1s ease-in-out;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .product-item.hide {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .filter-btn.active {
+            background-color: #a3238e;
+            color: #fff;
+        }
+        .btn-outline-primary {
+            --bs-btn-border-color: #03a752;
+        }
+
+        /* Filter Scroll Wrapper */
+        .filter-scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        .filter-buttons-container {
+            min-width: max-content;
+            padding-bottom: 5px;
+        }
+
+        /* ==================== Newsletter ==================== */
+        .newsletter-section {
+            background-color: #f8f9fa;
+            padding: 0px 0;
+        }
+
+        /* ==================== Gradient Background Utility ==================== */
+        .gradient-background {
+            background: linear-gradient(135deg, #C77752, #B0B0B0);
+        }
+
+        /* ==================== Footer ==================== */
+        footer {
+            padding: 40px 0;
+            position: relative;
+            background-color: #f8f9fa;
+            z-index: 1;
+            overflow: hidden;
+        }
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/footer/footer-banner.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light position-absolute top-0 start-0 w-100" style="z-index: 10;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/Logo-02.png" alt="PremiumShop Logo" class="img-fluid" style="max-width: 50px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#product">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-auto">
+                    <a href="#" class="btn btn-outline-dark"><i class="bi bi-person"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="heroSlider" class="Banner-Top img-fluid w-100"></div>
+    <!-- Hero Slider -->
+    
+    <!-- Hero Section -->
+
+    <!-- Featured Products -->
+    <section class="py-5">
+        <div class="container" id="product">
+            <div class="text-center mb-5">
+                <h2>Our Products</h2>
+                <p class="lead fs-6">Discover the talented individuals behind our success. Each member brings unique skills and passion to our mission.</p>
+            </div>
+
+            <!-- Product Button -->
+            <div class="filter-scroll-wrapper mb-4" role="tablist" aria-label="Product Filter">
+                <div class="d-flex flex-nowrap justify-content-start gap-2 filter-buttons-container">
+                    <button class="btn btn-outline-primary filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="shirt" aria-pressed="false">Shirt</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="pant" aria-pressed="false">Pant</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="suits" aria-pressed="false">Suits</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="blazers" aria-pressed="false">Blazers</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="panjabi" aria-pressed="false">Panjabi</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="mujib-coat" aria-pressed="false">Mujib Coat</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="prince-coat" aria-pressed="false">Prince Coat</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="sherwani" aria-pressed="false">Sherwani</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="payjama" aria-pressed="false">Payjama</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="coti" aria-pressed="false">Coti</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="over-coat" aria-pressed="false">Over Coat</button>
+                    <button class="btn btn-outline-primary filter-btn" data-filter="safari" aria-pressed="false">Safari</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                            
+                <!-- Shirt -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="shirt">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Classic Shirt">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Classic Shirt</h5>
+                        <p class="text-muted small">Everyday formal shirt.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">210 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="shirt">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Slim Fit Shirt">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Slim Fit Shirt</h5>
+                        <p class="text-muted small">Smart, body-fit style.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">210 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="shirt">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Casual Shirt">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Casual Shirt</h5>
+                        <p class="text-muted small">Weekend style staple.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">210 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Pant -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="pant">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Formal Pant">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Formal Pant</h5>
+                        <p class="text-muted small">Classic formal pant.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">220 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="pant">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Chino Pant">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Chino Pant</h5>
+                        <p class="text-muted small">Casual and sleek.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">220 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="pant">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Slim Fit Pant">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Slim Fit Pant</h5>
+                        <p class="text-muted small">Tapered leg design.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">220 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Panjabi -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="panjabi">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Traditional Panjabi">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Traditional Panjabi</h5>
+                        <p class="text-muted small">Elegant ethnic wear.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">240 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="panjabi">
+                    <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Cotton Panjabi">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Cotton Panjabi</h5>
+                        <p class="text-muted small">Comfort in tradition.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">240 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-item" data-category="panjabi">
+                    <div class="card product-card h-100">
+                        <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Festive Panjabi">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fs-md-5">Festive Panjabi</h5>
+                        <p class="text-muted small">Vibrant and rich design.</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">240 BDT</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">View All Products</a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light gradient-background">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <h3>Free Shipping</h3>
+                    <p>Free delivery on all orders over $50</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day return policy on all items</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3>Secure Payment</h3>
+                    <p>Your payment information is protected</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Our Top Products</h2>
+                <p class="lead fs-6">Discover our best-selling and most popular items handpicked just for you. Quality and style you can trust!</p>
+            </div>
+            <div class="row">
+                <!-- Suits -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Classic Suit">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Classic Suit</h5>
+                    <p class="text-muted small">Elegant and timeless.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">45,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Modern Fit Suit">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Modern Fit Suit</h5>
+                    <p class="text-muted small">Sharp and stylish.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">50,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Blazers -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Navy Blue Blazer">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Navy Blue Blazer</h5>
+                    <p class="text-muted small">Perfect for formal occasions.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">22,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Grey Blazer">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Grey Blazer</h5>
+                    <p class="text-muted small">Versatile and chic.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">20,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Panjabi -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Traditional Panjabi">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Traditional Panjabi</h5>
+                    <p class="text-muted small">Elegant ethnic wear.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">15,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Cotton Panjabi">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Cotton Panjabi</h5>
+                    <p class="text-muted small">Comfort and tradition.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">14,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Mujib Coat -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Classic Mujib Coat">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Classic Mujib Coat</h5>
+                    <p class="text-muted small">Iconic and elegant.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">30,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Modern Mujib Coat">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Modern Mujib Coat</h5>
+                    <p class="text-muted small">Sleek and comfortable.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">32,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Prince Coat -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Royal Prince Coat">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Royal Prince Coat</h5>
+                    <p class="text-muted small">Luxurious design.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">40,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Elegant Prince Coat">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Elegant Prince Coat</h5>
+                    <p class="text-muted small">Refined and stylish.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">38,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Sherwani -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Royal Sherwani">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Royal Sherwani</h5>
+                    <p class="text-muted small">Traditional with modern touch.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">55,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+                <div class="card product-card h-100">
+                    <img src="img/man/polo-shirt-6.png" class="card-img-top img-fluid" alt="Embroidered Sherwani">
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fs-6 fs-md-5">Embroidered Sherwani</h5>
+                    <p class="text-muted small">Intricate and rich.</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="h6 fw-bold">58,000 BDT</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+            <!-- <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">View All Products</a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Contact Form with Map Section -->
+    <section class="py-5">
+        <div class="container" >
+            <div class="text-center mb-5" id="contact">
+                <h2>Contact Us</h2>
+                <p class="lead fs-6">We’re Here to Help – Reach Out for Inquiries, Orders, or Assistance Anytime!</p>
+            </div>
+            <div class="row g-4">
+                <!-- Contact Form Column -->
+                <div class="col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <!-- <h2 class="mb-4">Contact Us</h2> -->
+                            <form>
+                                <div class="row g-3">
+                                    <!-- Name Input -->
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <!-- Email Input -->
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <!-- Phone Input -->
+                                    <div class="col-12">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    <!-- Subject Select -->
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <select class="form-select" id="subject">
+                                            <option selected>Choose...</option>
+                                            <option>General Inquiry</option>
+                                            <option>Product Support</option>
+                                            <option>Billing Question</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <!-- Message Textarea -->
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Map Column -->
+                <div class="col-lg-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body p-0">
+                            <div class="ratio ratio-16x9 h-100">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.5812283601335!2d90.41098527924143!3d23.72664421505849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8f824a64333%3A0xef4d022d8cd53c1!2sCity%20Heart%20Tailor!5e0!3m2!1sen!2sbd!4v1722348574491!5m2!1sen!2sbd"
+                                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-black">
+        <div class="container text-black" >
+            <div class="row">
+                <div class="col-md-5 mb-4">
+                    <h5>City Herat Tailor</h5>
+                    <p>City Heart Tailor – Your trusted destination for expert tailoring, custom fits, and quality craftsmanship. We take pride in delivering stylish, comfortable, and perfectly stitched clothing to match your unique style.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2 "><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4"></div>
+
+                <div class="col-md-5 mb-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="bi bi-geo-alt me-2"></i>102/103/104 Ramna Bhaban (2nd Floor), Dhaka-1000</p>
+                        <p><i class="bi bi-telephone me-2"></i>+880-1715-584441</p>
+                        <p><i class="bi bi-envelope me-2"></i> Cityhearttailor@gmail.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 City Heart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script><!-- Bootstrap 5 JS Bundle with Popper -->
+    <script>
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons, add to clicked button
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                productItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+
+                    if (filter === 'all' || category === filter) {
+                        // Remove hide and d-none, then fade in
+                        item.classList.remove('hide', 'd-none');
+                        item.style.opacity = 0;
+                        setTimeout(() => {
+                            item.style.transition = 'opacity 0.4s ease-in-out';
+                            item.style.opacity = 1;
+                        }, 50);
+                    } else {
+                        // Fade out then add hide and d-none
+                        item.style.transition = 'opacity 0.4s ease-in-out';
+                        item.style.opacity = 0;
+                        setTimeout(() => {
+                            item.classList.add('hide', 'd-none');
+                        }, 400);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</body>
+</html>
